@@ -1,4 +1,4 @@
-PlotMyCluster<-function(Exp,Procs=4,Bootstraps=25,Row=1,skip=0,log=FALSE,SaveMatrices=FALSE,Features='Features',tissue='Tissue',Corr=FALSE,Boxplot=FALSE) {
+PlotMyCluster<-function(Exp,Procs=4,Bootstraps=25,RowNames=1,skip=0,log=FALSE,SaveMatrices=FALSE,Features='Features',tissue='Tissue',Corr=FALSE,Boxplot=FALSE) {
 	library(snow)
 	library(pvclust)
 	library(tools)	
@@ -6,13 +6,9 @@ PlotMyCluster<-function(Exp,Procs=4,Bootstraps=25,Row=1,skip=0,log=FALSE,SaveMat
 	library(ggfortify)
   library(phylogram)
   dist<-"euclidian"
-  Exp<-read.table(Exp,row.names=Row,header=TRUE)
+  Exp<-read.table(Exp,row.names=RowNames,header=TRUE)
+  Exp<-Exp[,-skip]
   print(names(Exp))
-  if(skip>0){
-    exp<-exp[,skip]
-  }
-  else{
-  }
 	Exp<-Exp[which(rowSums(Exp)>0),]
 	cl<-makeCluster(Procs,type="SOCK")
 	if (log) {
