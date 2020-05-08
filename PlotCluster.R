@@ -4,7 +4,8 @@ PlotMyCluster<-function(Exp,Procs=4,Bootstraps=25,Row=1,skip=0,log=FALSE,SaveMat
 	library(tools)	
 	library(corrplot)
 	library(ggfortify)
-  library(phylogram)
+  	library(phylogram)
+	library(dendextend)
   dist<-"euclidian"
   Exp<-read.table(Exp,row.names=Row,header=TRUE)
   print(names(Exp))
